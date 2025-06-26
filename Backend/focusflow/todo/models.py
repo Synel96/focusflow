@@ -7,22 +7,22 @@ from django.conf import settings
 class UserProfileManager(BaseUserManager):
     
 
-    def create_user(self, email, user_name, password=None, **extra_fields):
+    def create_user(self, email, username, password=None, **extra_fields):
         if not email:
             raise ValueError('User must have an email address')
 
         email = self.normalize_email(email)
-        user = self.model(email=email, user_name=user_name, **extra_fields)
+        user = self.model(email=email, user_name=username, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, user_name, password=None, **extra_fields):
+    def create_superuser(self, email, username, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('is_active', True)
 
-        return self.create_user(email, user_name, password, **extra_fields)
+        return self.create_user(email, username, password, **extra_fields)
         
 
 
@@ -31,7 +31,7 @@ class Users(AbstractBaseUser,PermissionsMixin):
     last_name = models.CharField(max_length=255, blank=True, null=True)
     first_name = models.CharField(max_length=255, blank=True, null=True)
     email = models.EmailField(unique=True, max_length=255)
-    user_name = models.CharField(unique=True, max_length=255)
+    username = models.CharField(unique=True, max_length=255)
     is_staff = models.BooleanField(blank=True, default=False)
     is_superuser = models.BooleanField(blank=True, default=False)
     is_active = models.BooleanField(blank=True, default=True)
@@ -39,7 +39,7 @@ class Users(AbstractBaseUser,PermissionsMixin):
     objects = UserProfileManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['user_name']
+    REQUIRED_FIELDS = ['username']
 
     
 
