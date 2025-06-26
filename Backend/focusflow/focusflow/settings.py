@@ -19,10 +19,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-!i@8gfw83l+hjc8v^z9k^zce*@57^yqirl8xl$$=9)yo^0t-@_"
+SECRET_KEY = "django-insecure-!i@8gfw83l+hjc8v^z9k^zce*@57^yqirl8xl$$=9)yo^0t-_"
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -37,6 +35,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "todo",
+    "rest_framework"
+  
 ]
 
 MIDDLEWARE = [
@@ -75,11 +76,11 @@ WSGI_APPLICATION = "focusflow.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'focusflow',         
-        'USER': 'root',          
-        'PASSWORD': 'SajtosKifli123',              
-        'HOST': 'localhost',               
-        'PORT': '3306',                    
+        'NAME': 'focusflow',
+        'USER': 'root',
+        'PASSWORD': 'SajtosKifli123',
+        'HOST': 'localhost',
+        'PORT': '3306',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
         }
@@ -127,3 +128,5 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+AUTH_USER_MODEL = "todo.Users"
